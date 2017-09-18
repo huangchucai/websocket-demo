@@ -14,11 +14,12 @@ footer{
 }
 form {
   border: 10px solid #2D76A3;
+    display: flex;
 }
 .ipt {
   border: none;
   outline: none;
-  width: 300px;
+  min-width: 150px;
   padding: 5px 10px;
 }
 .btn {
@@ -28,4 +29,16 @@ form {
   border: none;
   outline: none;
   padding: 4px 5px;
+}
+.active {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  font-size: 20px;
+  transition: all .4s;
+}
+.normal {
+  position: static;
+  transform: translate(0, 0); 
 }

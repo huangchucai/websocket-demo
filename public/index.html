@@ -21,55 +21,22 @@
   </footer>
   <script src="/socket.io/socket.io.js"></script>
   <script>
-    let socket = io();
-    const name = [
-      "景天",
-      "唐雪见",
-      "龙葵",
-      "紫萱",
-      "花楹",
-      "徐长卿",
-      "精精",
-      "清微",
-      "幽玄",
-      "苍古",
-      "净明",
-      "和阳",
-      "商风子",
-      "溪风",
-      "水碧",
-      "天妖皇",
-      "银眉妖狐",
-      "火鬼王",
-      "唐益",
-      "云霆",
-      "万玉枝",
-      "赵无延",
-      "赵文昌",
-      "丁时彦",
-      "苍萤",
-      "古藤老人",
-      "翁和月",
-      "邪剑仙",
-      "夕瑶",
-      "飞蓬",
-      "重楼"
-    ]
-    random = Math.floor((name.length) * Math.random())
-    let ipt = document.querySelector('.ipt');
-    let btn = document.querySelector('.btn');
+    var socket = io();
+    var nameArr = ["景天","唐雪见","龙葵","紫萱","花楹","徐长卿","精精","清微","幽玄","苍古","净明", "和阳","商风子","溪风","水碧","天妖皇","银眉妖狐", "火鬼王","唐益","云霆","万玉枝", "赵无延","赵文昌","丁时彦","苍萤","古藤老人","翁和月","邪剑仙"]
+    var random = Math.floor((nameArr.length) * Math.random())
+    var ipt = document.querySelector('.ipt');
+    var btn = document.querySelector('.btn');
     btn.addEventListener('click', (e) => {
       e.preventDefault()
-      socket.emit('chat',name[random], ipt.value);
+      socket.emit('chat',nameArr[random], ipt.value);
     })
-    let main = document.querySelector('main');
+    var main = document.querySelector('main');
     socket.on('chat-from-server', (data) => {
       showMsg(data)
     })
 
 
     function showMsg(msg) {
-      console.log(Notification.permission)
       if (Notification.permission === 'granted') {
         var notification = new Notification(msg, {
           icon: 'http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg',
@@ -86,8 +53,12 @@
           }
         });
       }
-      let node = document.createElement('p');
-      node.innerText = msg
+      var node = document.createElement('p');
+      node.innerText = msg;
+      node.classList.add('active')
+      setTimeout(() => {
+        node.classList.add('normal')
+      },500)
       main.appendChild(node)
       ipt.value = '';
     }
