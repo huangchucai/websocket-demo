@@ -1,13 +1,13 @@
-const express = require('express');
-const name = require('./lib/name.js').name;
-const axios = require('axios');
-let APP_KEY = '9ec33ae01b9443a794aefb6d5ee4d9e8'
+var express = require('express');
+var name = require('./lib/name.js').name;
+var axios = require('axios');
+var APP_KEY = '9ec33ae01b9443a794aefb6d5ee4d9e8'
 
-const app = express();
+var app = express();
 var server = require('http').createServer(app);
 
-let random = null;
-const io = require('socket.io')(server);
+var random = null;
+var io = require('socket.io')(server);
 io.on('connection', (socket) => {
   socket.on('chat' ,(user, data) => {
     // socket.emit('chat-from-server', `Say: ${data}`)
