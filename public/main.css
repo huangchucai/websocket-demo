@@ -1,0 +1,31 @@
+* {
+  box-sizing: border-box;
+}
+body{
+  background-color: #2281AE;
+  color: #fff;
+}
+footer{
+  position: fixed;
+  text-align: center;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%)
+}
+form {
+  border: 10px solid #2D76A3;
+}
+.ipt {
+  border: none;
+  outline: none;
+  width: 300px;
+  padding: 5px 10px;
+}
+.btn {
+  color: #014260;
+  background-color: #BDD9EE;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  padding: 4px 5px;
+}

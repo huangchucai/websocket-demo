@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>聊天室</title>
+  <link rel="stylesheet" href="./main.css">
+</head>
+
+<body>
+  <main>
+
+  </main>
+  <footer>
+    <form action="">
+      <input type="text" placeholder="请输入你说的话" class="ipt">
+      <button class="btn">发送</button>
+    </form>
+  </footer>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    let socket = io();
+    const name = [
+      "景天",
+      "唐雪见",
+      "龙葵",
+      "紫萱",
+      "花楹",
+      "徐长卿",
+      "精精",
+      "清微",
+      "幽玄",
+      "苍古",
+      "净明",
+      "和阳",
+      "商风子",
+      "溪风",
+      "水碧",
+      "天妖皇",
+      "银眉妖狐",
+      "火鬼王",
+      "唐益",
+      "云霆",
+      "万玉枝",
+      "赵无延",
+      "赵文昌",
+      "丁时彦",
+      "苍萤",
+      "古藤老人",
+      "翁和月",
+      "邪剑仙",
+      "夕瑶",
+      "飞蓬",
+      "重楼"
+    ]
+    random = Math.floor((name.length) * Math.random())
+    let ipt = document.querySelector('.ipt');
+    let btn = document.querySelector('.btn');
+    btn.addEventListener('click', (e) => {
+      e.preventDefault()
+      socket.emit('chat',name[random], ipt.value);
+    })
+    let main = document.querySelector('main');
+    socket.on('chat-from-server', (data) => {
+      showMsg(data)
+    })
+
+
+    function showMsg(msg) {
+      console.log(Notification.permission)
+      if (Notification.permission === 'granted') {
+        var notification = new Notification(msg, {
+          icon: 'http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg',
+          body: '来着小才的问候'
+        });
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission(function (permission) {
+          // 如果用户同意，就可以向他们发送通知
+          if (permission === "granted") {
+            var notification = new Notification(msg, {
+              icon: 'http://placekitten.com.s3.amazonaws.com/homepage-samples/96/139.jpg',
+              body: '来着小才的问候'
+            });
+          }
+        });
+      }
+      let node = document.createElement('p');
+      node.innerText = msg
+      main.appendChild(node)
+      ipt.value = '';
+    }
+  </script>
+
+
+</body>
+
+</html>
